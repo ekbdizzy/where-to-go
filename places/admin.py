@@ -4,6 +4,7 @@ from .models import Place, ImagesPlace
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
+
     class Meta:
         model = Place
 

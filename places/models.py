@@ -15,6 +15,22 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
+    def get_geojson(self):
+        geo_json_data = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [self.coordinates_lng, self.coordinates_lat]
+            },
+            "properties": {
+                "title": self.title,
+                "placeId": self.id,
+                "detailsUrl": "static/places/moscow_legends.json"
+
+            }
+        }
+        return geo_json_data
+
 
 class ImagesPlace(models.Model):
 
@@ -22,7 +38,7 @@ class ImagesPlace(models.Model):
         filename = f'{self.place.title}.{filename.split(".")[-1]}'
         return f'places/{filename}'
 
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=upload_images_to_places)
 
     def __str__(self):
