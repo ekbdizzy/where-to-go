@@ -8,11 +8,9 @@ from .models import Place, ImagesPlace
 def place_detail_view(request, place_id: int):
     place = get_object_or_404(Place, id=place_id)
     images = ImagesPlace.objects.filter(place=place)
-
     context = {
         "title": place.title,
         "imgs": [image.image.url for image in images],
-
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
@@ -21,7 +19,9 @@ def place_detail_view(request, place_id: int):
         }
     }
 
-    return JsonResponse(context, encoder=DjangoJSONEncoder, safe=False,
+    return JsonResponse(context,
+                        encoder=DjangoJSONEncoder,
+                        safe=False,
                         json_dumps_params={
                             'ensure_ascii': False,
                             'indent': 2

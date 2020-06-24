@@ -205,7 +205,7 @@
             marker.bindTooltip(geoJsonPoint.properties.title);
             marker.bindPopup(function (layer) {
                 return geoJsonPoint.properties.title;
-            })
+            });
 
             marker.on('click', function (event) {
                 log.debug('Feature selected', geoJsonPoint);

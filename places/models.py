@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Place(models.Model):
@@ -25,7 +26,7 @@ class Place(models.Model):
             "properties": {
                 "title": self.title,
                 "placeId": self.id,
-                "detailsUrl": "static/places/moscow_legends.json"
+                "detailsUrl": reverse('place:detail', kwargs={"place_id": self.id})
 
             }
         }
