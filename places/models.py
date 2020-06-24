@@ -42,5 +42,10 @@ class ImagesPlace(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=upload_images_to_places)
 
+
+    class Meta:
+        verbose_name = 'Photo'
+        verbose_name_plural = 'Photos'
+
     def __str__(self):
         return f"{self.id} {self.place.title}"
