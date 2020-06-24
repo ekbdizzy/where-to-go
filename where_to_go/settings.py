@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'places',
 
     'django_extensions',
+    'adminsortable2',
 ]
 
 MIDDLEWARE = [

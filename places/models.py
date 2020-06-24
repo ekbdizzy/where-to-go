@@ -12,6 +12,7 @@ class Place(models.Model):
     class Meta:
         verbose_name = 'Place'
         verbose_name_plural = 'Places'
+        ordering = ('title', )
 
     def __str__(self):
         return self.title
@@ -41,11 +42,12 @@ class ImagesPlace(models.Model):
 
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=upload_images_to_places)
-
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     class Meta:
         verbose_name = 'Photo'
         verbose_name_plural = 'Photos'
+        ordering = ('order', )
 
     def __str__(self):
         return f"{self.id} {self.place.title}"
