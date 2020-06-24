@@ -1,9 +1,12 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = 'ag(lje8r*a2k1f-1n)-=!vxby+vx*p3w7r8&m($$^i662d24x0'
+SECRET_KEY = os.getenv('SECRET_KEY') or 'ag(lje8r*a2k1f-1n)-=!vxby+vx*p3w7r8&m($$^i662d24x0'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -16,7 +19,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'adminsortable2',
-    'tinymce'
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -73,13 +76,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 STATIC_URL = '/static/'
