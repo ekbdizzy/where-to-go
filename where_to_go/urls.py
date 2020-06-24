@@ -7,6 +7,7 @@ from .views import MainView
 
 urlpatterns = [
     path('place/', include('places.urls', namespace='place')),
+    path('tinymce/', include('tinymce.urls')),
     path('admin/', admin.site.urls),
     path('', MainView.as_view())
 ]

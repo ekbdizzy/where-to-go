@@ -16,6 +16,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'adminsortable2',
+    'tinymce'
 ]
 
 MIDDLEWARE = [
