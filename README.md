@@ -1,5 +1,5 @@
 ## Where to go
-Simple web application on Django, VueJS to help you find interesting places.
+Simple web application on Django, VueJS to help you searching interesting places.
 All places have marks on the map and show you information about themselves with a click.
 
 
@@ -12,8 +12,8 @@ Demo: [where-to-go](http://koshkinaleksey.pythonanywhere.com/ "Site demo on pyth
 
 Administrator panel: [where-to-go/admin](http://koshkinaleksey.pythonanywhere.com/admin)
 
-Administrator login: ``admin`` Password: ``1``     
-Content Manager login  ``manager`` Password: ``2``
+Administrator login: ``admin`` password: ``1``     
+Content Manager login  ``manager`` password: ``2``
 ***
 ### How to install
 Before installation create and activate [virtualenv](https://virtualenv.pypa.io/en/latest/) for your project.
