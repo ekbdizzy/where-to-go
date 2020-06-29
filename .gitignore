@@ -1,9 +1,10 @@
 venv/
 .idea/
-*/__pycache__/
 */migrations/
-*/*/__pycache__/
 .DS_Store
 db.sqlite3
 media/
 where_to_go/.env
+*/__pycache__/
+*/*/__pycache__
+*/*/*/__pycache__

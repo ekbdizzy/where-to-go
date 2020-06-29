@@ -24,7 +24,13 @@ venv/bin/python manage.py create_env
 venv/bin/python makemigrations
 venv/bin/python migrate
 venv/bin/python createsuperuser
-venv/bin/python manage.py load_place
 venv/bin/python collectstatic
 venv/bin/python manage.py runserver
 ```
+
+
+### Add new place from url
+```
+venv/bin/python manage.py load_place url
+```
+

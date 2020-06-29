@@ -24,3 +24,9 @@ class PlaceAdmin(admin.ModelAdmin):
     list_display = ('title',)
     search_fields = ('title',)
     inlines = (ImagesPlaceInline,)
+
+
+@admin.register(ImagesPlace)
+class ImagesPlaceAdmin(admin.ModelAdmin):
+    class Meta:
+        model = ImagesPlace
