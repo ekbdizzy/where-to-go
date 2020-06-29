@@ -1,3 +1,4 @@
+import os
 import requests
 from PIL import Image
 from io import BytesIO
@@ -10,6 +11,13 @@ logging.basicConfig(level=logging.INFO)
 class SaveImagePlace:
 
     def __init__(self, url: str):
+
+        if not os.path.exists('media'):
+            os.mkdir('media')
+
+        if not os.path.exists('media/places'):
+            os.mkdir('media/places')
+
         self.url = url
         self.filename = url.split('/')[-1]
         self.media_path_to_image = 'places/{}'.format(self.filename)
