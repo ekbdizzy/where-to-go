@@ -1,6 +1,5 @@
 venv/
 .idea/
-*/migrations/
 .DS_Store
 db.sqlite3
 media/
