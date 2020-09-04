@@ -3,9 +3,9 @@ Simple web application on Django, VueJS to help you searching interesting places
 All places have marks on the map and show you information about themselves with a click.
 
 
-Project was created as first lesson in [module Django](https://dvmn.org/modules/django/) by [Devman](https://dvmn.org)
+Project was created as first lesson in [module Django](https://dvmn.org/modules/django/) by [Devman](https://dvmn.org).
 
-Test data from [kudago.com](https://kudago.com/)
+Test data from [kudago.com](https://kudago.com/).
 ***
 ### Demo
 Demo: [where-to-go](http://koshkinaleksey.pythonanywhere.com/ "Site demo on pythonanywhere.com")
