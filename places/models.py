@@ -4,16 +4,16 @@ from tinymce.models import HTMLField
 
 
 class Place(models.Model):
-    title = models.CharField(blank=True, null=True, default='', max_length=200)
-    description_short = models.TextField(blank=True, null=True, default='')
-    description_long = HTMLField(blank=True, null=True, default='')
-    coordinates_lng = models.FloatField(blank=True, null=True, default=0)
-    coordinates_lat = models.FloatField(blank=True, null=True, default=0)
+    title = models.CharField(blank=True, default='', max_length=200)
+    description_short = models.TextField(blank=True, default='')
+    description_long = HTMLField(blank=True, default='')
+    coordinates_lng = models.FloatField(blank=True, default=0)
+    coordinates_lat = models.FloatField(blank=True, default=0)
 
     class Meta:
         verbose_name = 'Place'
         verbose_name_plural = 'Places'
-        ordering = ('title', )
+        ordering = ('title',)
 
     def __str__(self):
         return self.title
@@ -48,7 +48,7 @@ class ImagesPlace(models.Model):
     class Meta:
         verbose_name = 'Photo'
         verbose_name_plural = 'Photos'
-        ordering = ('order', )
+        ordering = ('order',)
 
     def __str__(self):
         return f"{self.id} {self.place.title}"
