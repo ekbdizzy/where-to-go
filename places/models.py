@@ -4,15 +4,15 @@ from tinymce.models import HTMLField
 
 
 class Place(models.Model):
-    title = models.CharField(max_length=200)
-    description_short = models.TextField(blank=True)
-    description_long = HTMLField(blank=True)
-    coordinates_lng = models.FloatField(default=0)
-    coordinates_lat = models.FloatField(default=0)
+    title = models.CharField(max_length=200, verbose_name='Заголовок')
+    description_short = models.TextField(blank=True, verbose_name='Краткое описание')
+    description_long = HTMLField(blank=True, verbose_name='Подробная информация')
+    coordinates_lng = models.FloatField(default=0, verbose_name='Координаты долготы')
+    coordinates_lat = models.FloatField(default=0, verbose_name='Координаты широты')
 
     class Meta:
-        verbose_name = 'Place'
-        verbose_name_plural = 'Places'
+        verbose_name = 'Интересное место'
+        verbose_name_plural = 'Интересные места'
         ordering = ('title',)
 
     def __str__(self):
@@ -46,8 +46,8 @@ class ImagesPlace(models.Model):
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     class Meta:
-        verbose_name = 'Photo'
-        verbose_name_plural = 'Photos'
+        verbose_name = 'Фотография'
+        verbose_name_plural = 'Фотографии'
         ordering = ('order',)
 
     def __str__(self):
