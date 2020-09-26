@@ -4,11 +4,11 @@ from tinymce.models import HTMLField
 
 
 class Place(models.Model):
-    title = models.CharField(blank=True, default='', max_length=200)
-    description_short = models.TextField(blank=True, default='')
-    description_long = HTMLField(blank=True, default='')
-    coordinates_lng = models.FloatField(blank=True, default=0)
-    coordinates_lat = models.FloatField(blank=True, default=0)
+    title = models.CharField(max_length=200)
+    description_short = models.TextField(blank=True)
+    description_long = HTMLField(blank=True)
+    coordinates_lng = models.FloatField(default=0)
+    coordinates_lat = models.FloatField(default=0)
 
     class Meta:
         verbose_name = 'Place'
