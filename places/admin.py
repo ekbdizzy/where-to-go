@@ -12,15 +12,11 @@ class ImagesPlaceInline(SortableInlineAdminMixin, admin.TabularInline):
     extra = 1
 
     def preview(self, obj):
-        h = 'max-height:200px;'
-        return format_html(f'<img src="{obj.image.url}" width=auto style={h} />')
+        return format_html('<img src="{}" width=auto style=max-height:200px; />', obj.image.url)
 
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    class Meta:
-        model = Place
-
     list_display = ('title',)
     search_fields = ('title',)
     inlines = (ImagesPlaceInline,)
@@ -28,5 +24,4 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(ImagesPlace)
 class ImagesPlaceAdmin(admin.ModelAdmin):
-    class Meta:
-        model = ImagesPlace
+    pass

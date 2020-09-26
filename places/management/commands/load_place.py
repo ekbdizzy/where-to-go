@@ -17,8 +17,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         url = options['url']
-
-        response = requests.request('GET', url).json()
+        response = requests.get(url).json()
         title = response['title']
         imgs = response['imgs']
         description_short = response['description_short']

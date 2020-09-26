@@ -29,7 +29,6 @@ class Place(models.Model):
                 "title": self.title,
                 "placeId": self.id,
                 "detailsUrl": reverse('place:detail', kwargs={"place_id": self.id})
-
             }
         }
         return geo_json_data
@@ -43,7 +42,7 @@ class ImagesPlace(models.Model):
 
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=upload_images_to_places)
-    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    order = models.PositiveIntegerField(default=0)
 
     class Meta:
         verbose_name = 'Фотография'
