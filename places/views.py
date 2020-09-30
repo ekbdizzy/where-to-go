@@ -2,12 +2,12 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 
-from .models import Place, ImagesPlace
+from .models import Place
 
 
 def place_detail_view(request, place_id: int):
     place = get_object_or_404(Place, id=place_id)
-    images = ImagesPlace.objects.filter(place=place)
+    images = place.images.all()
     context = {
         "title": place.title,
         "imgs": [image.image.url for image in images],

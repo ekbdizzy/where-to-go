@@ -5,7 +5,7 @@ from io import BytesIO
 from typing import NoReturn
 import logging
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('main')
 
 
 class SaveImagePlace:
@@ -30,4 +30,4 @@ class SaveImagePlace:
 
         image.save('media/{}'.format(self.media_path_to_image))
 
-        logging.info('{} is saved.'.format(self.media_path_to_image))
+        logger.info('{} is saved.'.format(self.media_path_to_image))

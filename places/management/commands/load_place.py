@@ -4,7 +4,7 @@ import requests
 import logging
 from utils import SaveImagePlace
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('main')
 
 
 class Command(BaseCommand):
@@ -34,7 +34,7 @@ class Command(BaseCommand):
         )
 
         if place[1]:
-            logging.info('{} is created'.format(place[0].title))
+            logger.info('{} is created'.format(place[0].title))
 
         for image_link in imgs:
             s = SaveImagePlace(image_link)
