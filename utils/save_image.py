@@ -25,9 +25,10 @@ class SaveImagePlace:
     def save(self) -> NoReturn:
         """Get image from url and save to media/places/ folder."""
 
-        response = requests.request(method='GET', url=self.url)
+        response = requests.get(url=self.url)
+        if not response.ok:
+            response.raise_for_status()
+
         image = Image.open(BytesIO(response.content))
-
         image.save('media/{}'.format(self.media_path_to_image))
-
         logger.info('{} is saved.'.format(self.media_path_to_image))

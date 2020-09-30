@@ -4,6 +4,8 @@ import requests
 import logging
 from utils import SaveImagePlace
 
+import time
+
 logger = logging.getLogger('main')
 
 
@@ -17,13 +19,17 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         url = options['url']
-        response = requests.get(url).json()
-        title = response['title']
-        imgs = response['imgs']
-        description_short = response['description_short']
-        description_long = response['description_long']
-        coordinates_lng = response['coordinates']['lng']
-        coordinates_lat = response['coordinates']['lat']
+        response = requests.get(url)
+        if not response.ok:
+            response.raise_for_status()
+
+        response_data = response.json()
+        title = response_data['title']
+        imgs = response_data['imgs']
+        description_short = response_data['description_short']
+        description_long = response_data['description_long']
+        coordinates_lng = response_data['coordinates']['lng']
+        coordinates_lat = response_data['coordinates']['lat']
 
         place = Place.objects.get_or_create(
             title=title,
