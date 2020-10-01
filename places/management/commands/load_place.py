@@ -4,8 +4,6 @@ import requests
 import logging
 from utils import SaveImagePlace
 
-import time
-
 logger = logging.getLogger('main')
 
 
@@ -20,16 +18,19 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         url = options['url']
         response = requests.get(url)
-        if not response.ok:
-            response.raise_for_status()
+        response.raise_for_status()
 
         response_data = response.json()
-        title = response_data['title']
-        imgs = response_data['imgs']
-        description_short = response_data['description_short']
-        description_long = response_data['description_long']
-        coordinates_lng = response_data['coordinates']['lng']
-        coordinates_lat = response_data['coordinates']['lat']
+        try:
+            title = response_data['title']
+            imgs = response_data['imgs']
+            description_short = response_data['description_short']
+            description_long = response_data['description_long']
+            coordinates_lng = response_data['coordinates']['lng']
+            coordinates_lat = response_data['coordinates']['lat']
+        except KeyError as e:
+            logger.error(e)
+            return
 
         place = Place.objects.get_or_create(
             title=title,
@@ -43,11 +44,11 @@ class Command(BaseCommand):
             logger.info('{} is created'.format(place[0].title))
 
         for image_link in imgs:
-            s = SaveImagePlace(image_link)
-            s.save()
+            s = SaveImagePlace()
+            s.save(image_link)
 
             new_image_place = ImagesPlace.objects.create(
                 place=place[0],
-                image=s.media_path_to_image
+                image=f"places/{image_link.split('/')[-1]}"
             )
             new_image_place.save()

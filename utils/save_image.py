@@ -10,7 +10,7 @@ logger = logging.getLogger('main')
 
 class SaveImagePlace:
 
-    def __init__(self, url: str):
+    def __init__(self):
 
         if not os.path.exists('media'):
             os.mkdir('media')
@@ -18,17 +18,16 @@ class SaveImagePlace:
         if not os.path.exists('media/places'):
             os.mkdir('media/places')
 
-        self.url = url
-        self.filename = url.split('/')[-1]
-        self.media_path_to_image = 'places/{}'.format(self.filename)
+    @staticmethod
+    def _get_image_data_from_url(url: str):
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.content
 
-    def save(self) -> NoReturn:
-        """Get image from url and save to media/places/ folder."""
-
-        response = requests.get(url=self.url)
-        if not response.ok:
-            response.raise_for_status()
-
-        image = Image.open(BytesIO(response.content))
-        image.save('media/{}'.format(self.media_path_to_image))
-        logger.info('{} is saved.'.format(self.media_path_to_image))
+    def save(self, url: str) -> NoReturn:
+        """Save image to media/places/ folder."""
+        image = Image.open(BytesIO(self._get_image_data_from_url(url)))
+        filename = url.split('/')[-1]
+        media_path_to_image = 'places/{}'.format(filename)
+        image.save('media/{}'.format(media_path_to_image))
+        logger.info('{} is saved.'.format(media_path_to_image))
