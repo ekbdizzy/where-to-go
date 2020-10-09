@@ -3,10 +3,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+def set_debug_level(var: str) -> bool:
+    if var == 'True':
+        return True
+    return False
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = os.getenv('SECRET_KEY') or 'secret_key'
-DEBUG = True
-ALLOWED_HOSTS = ['*']
+SECRET_KEY = os.getenv('SECRET_KEY', 'secret_key')
+DEBUG = set_debug_level(os.getenv('DEBUG', False))
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
