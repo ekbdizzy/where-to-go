@@ -1,7 +1,8 @@
 import os
-from dotenv import load_dotenv
+from environs import Env
 
-load_dotenv()
+env = Env()
+env.read_env()
 
 
 def set_debug_level(var: str) -> bool:
@@ -11,9 +12,9 @@ def set_debug_level(var: str) -> bool:
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = os.getenv('SECRET_KEY', 'secret_key')
-DEBUG = set_debug_level(os.getenv('DEBUG', False))
-ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
+SECRET_KEY = env.str('SECRET_KEY', 'secret_key')
+DEBUG = env.bool('DEBUG', False)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
