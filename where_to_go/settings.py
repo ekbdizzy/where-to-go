@@ -4,13 +4,6 @@ from environs import Env
 env = Env()
 env.read_env()
 
-
-def set_debug_level(var: str) -> bool:
-    if var == 'True':
-        return True
-    return False
-
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env.str('SECRET_KEY', 'secret_key')
 DEBUG = env.bool('DEBUG', False)
@@ -90,12 +83,10 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-if DEBUG:
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static_dev'),
+)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

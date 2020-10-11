@@ -50,7 +50,7 @@
         <div v-bind:class="{'sidebar-content': 1, 'bg-white': selectedPlace, 'bg-secondary': !selectedPlace}">
             <div v-if="promptVisible" class="d-flex flex-column justify-content-center align-items-center"
                  style="height: 100%;">
-                <img class="d-block select-place-prompt mb-4" src="../static/images/hand-pointer-regular.svg"
+                <img class="d-block select-place-prompt mb-4" src="{% static 'images/hand-pointer-regular.svg' %}"
                      alt="Select place">
                 <h4>Выберите место на карте</h4>
             </div>
@@ -67,8 +67,8 @@
                      v-bind:alt="selectedPlace.title">
 
                 {% verbatim %}
-                    <h5 class="mb-3">{{ selectedPlace.title }}</h5>
-                    <p>{{ selectedPlace.short_description }}</p>
+                <h5 class="mb-3">{{ selectedPlace.title }}</h5>
+                <p>{{ selectedPlace.short_description }}</p>
                 {% endverbatim %}
 
                 <div id="place-photos" class="carousel slide mb-3 shadow" data-ride="carousel" data-interval="5000">
@@ -131,7 +131,7 @@
         integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@ansur/leaflet-pulse-icon@0.1.1/dist/L.Icon.Pulse.js"></script>
 
-<script src="../static/js/leaflet-sidebar.js"></script>
+<script src="{% static 'js/leaflet-sidebar.js' %}"></script>
 
 <script>
     var map = L.map('map');
@@ -267,7 +267,7 @@
     map.on('click', function () {
         sidebarApp.selectedPlace = null;
         sidebarApp.loadingPlaceId = null;
-    })
+    });
 
     async function loadPlaceInfo(placeId, detailsUrl) {
         sidebarApp.selectedPlace = null;
