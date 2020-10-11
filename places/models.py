@@ -40,9 +40,9 @@ class PlacesImages(models.Model):
         filename = f'{self.place.title}.{filename.split(".")[-1]}'
         return f'places/{filename}'
 
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to=get_path_to_places_image)
-    order = models.PositiveIntegerField(default=0)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images', verbose_name='Название места')
+    image = models.ImageField(upload_to=get_path_to_places_image, verbose_name='Файл с фотографией')
+    order = models.PositiveIntegerField(default=0, verbose_name='Порядковый номер')
 
     class Meta:
         verbose_name = 'Фотография'

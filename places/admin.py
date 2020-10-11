@@ -12,7 +12,7 @@ class PlacesImagesInline(SortableInlineAdminMixin, admin.TabularInline):
     extra = 1
 
     def preview(self, obj):
-        return format_html('<img src="{}" width=auto style=max-height:200px; />', obj.image.url)
+        return format_html('<img src="{}" style="max-height:200px"; />', obj.image.url)
 
 
 @admin.register(Place)
