@@ -36,12 +36,12 @@ class Place(models.Model):
 
 class PlacesImages(models.Model):
 
-    def upload_images_to_places(self, filename):
+    def get_path_to_places_image(self, filename: str) -> str:
         filename = f'{self.place.title}.{filename.split(".")[-1]}'
         return f'places/{filename}'
 
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to=upload_images_to_places)
+    image = models.ImageField(upload_to=get_path_to_places_image)
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
