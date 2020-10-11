@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='ImagesPlace',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to=places.models.ImagesPlace.upload_images_to_places)),
+                ('image', models.ImageField(upload_to=places.models.PlacesImages.upload_images_to_places)),
                 ('place', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='places.Place')),
             ],
         ),

@@ -5,10 +5,10 @@ from tinymce.models import HTMLField
 
 class Place(models.Model):
     title = models.CharField(max_length=200, verbose_name='Заголовок')
-    description_short = models.TextField(blank=True, verbose_name='Краткое описание')
-    description_long = HTMLField(blank=True, verbose_name='Подробная информация')
-    coordinates_lng = models.FloatField(default=0, verbose_name='Координаты долготы')
-    coordinates_lat = models.FloatField(default=0, verbose_name='Координаты широты')
+    short_description = models.TextField(blank=True, verbose_name='Краткое описание')
+    detailed_description = HTMLField(blank=True, verbose_name='Подробная информация')
+    longitude_coord = models.FloatField(default=0, verbose_name='Координаты долготы')
+    latitude_coord = models.FloatField(default=0, verbose_name='Координаты широты')
 
     class Meta:
         verbose_name = 'Интересное место'
@@ -23,7 +23,7 @@ class Place(models.Model):
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [self.coordinates_lng, self.coordinates_lat]
+                "coordinates": [self.longitude_coord, self.latitude_coord]
             },
             "properties": {
                 "title": self.title,
@@ -34,7 +34,7 @@ class Place(models.Model):
         return geo_json_data
 
 
-class ImagesPlace(models.Model):
+class PlacesImages(models.Model):
 
     def upload_images_to_places(self, filename):
         filename = f'{self.place.title}.{filename.split(".")[-1]}'

@@ -11,11 +11,11 @@ def place_detail_view(request, place_id: int):
     context = {
         "title": place.title,
         "imgs": [image.image.url for image in images],
-        "description_short": place.description_short,
-        "description_long": place.description_long,
+        "description_short": place.short_description,
+        "description_long": place.detailed_description,
         "coordinates": {
-            "lat": place.coordinates_lat,
-            "lng": place.coordinates_lng
+            "lat": place.latitude_coord,
+            "lng": place.longitude_coord
         }
     }
 

@@ -2,11 +2,11 @@ from django.contrib import admin
 from django.utils.html import format_html
 from adminsortable2.admin import SortableInlineAdminMixin
 
-from .models import Place, ImagesPlace
+from .models import Place, PlacesImages
 
 
-class ImagesPlaceInline(SortableInlineAdminMixin, admin.TabularInline):
-    model = ImagesPlace
+class PlacesImagesInline(SortableInlineAdminMixin, admin.TabularInline):
+    model = PlacesImages
     list_display = ('order', 'image', 'preview')
     readonly_fields = ('preview',)
     extra = 1
@@ -19,9 +19,9 @@ class ImagesPlaceInline(SortableInlineAdminMixin, admin.TabularInline):
 class PlaceAdmin(admin.ModelAdmin):
     list_display = ('title',)
     search_fields = ('title',)
-    inlines = (ImagesPlaceInline,)
+    inlines = (PlacesImagesInline,)
 
 
-@admin.register(ImagesPlace)
+@admin.register(PlacesImages)
 class ImagesPlaceAdmin(admin.ModelAdmin):
     raw_id_fields = ('place',)
