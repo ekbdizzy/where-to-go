@@ -32,25 +32,25 @@ class Command(BaseCommand):
             logger.error(e)
             return
 
-        place = Place.objects.get_or_create(
+        new_place, is_created = Place.objects.get_or_create(
             title=title,
-            short_description=short_description,
-            detailed_description=detailed_description,
-            longitude_coord=longitude_coord,
-            latitude_coord=latitude_coord
+            defaults={
+                "short_description": short_description,
+                "detailed_description": detailed_description,
+                "longitude_coord": longitude_coord,
+                "latitude_coord": latitude_coord
+            }
         )
 
-        print(place)
+        if is_created:
+            logger.info('{} is created'.format(new_place.title))
 
-        # if place[1]:
-        #     logger.info('{} is created'.format(place[0].title))
-        #
-        # for image_link in imgs:
-        #     s = SaveImagePlace()
-        #     s.save(image_link)
-        #
-        #     new_image_place = PlacesImages.objects.create(
-        #         place=place[0],
-        #         image=f"places/{image_link.split('/')[-1]}"
-        #     )
-        #     new_image_place.save()
+        for image_link in imgs:
+            s = SaveImagePlace()
+            s.save(image_link)
+
+            new_image_place = PlacesImages.objects.create(
+                place=new_place,
+                image=f"places/{image_link.split('/')[-1]}"
+            )
+            new_image_place.save()
