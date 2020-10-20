@@ -19,7 +19,8 @@ class Command(BaseCommand):
         secret_key = get_random_string(50, chars)
 
         data = 'SECRET_KEY={}\n' \
-               'ALLOWED_HOSTS="*"'.format(secret_key)
+               'DEBUG=False' \
+               'ALLOWED_HOSTS=localhost'.format(secret_key)
 
         with open('where_to_go/.env', 'w') as file_object:
             file_object.write(data)

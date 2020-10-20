@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from places.models import Place, ImagesPlace
+from places.models import Place, PlacesImages
 import requests
 import logging
 from utils import SaveImagePlace
@@ -24,31 +24,33 @@ class Command(BaseCommand):
         try:
             title = response_data['title']
             imgs = response_data['imgs']
-            description_short = response_data['description_short']
-            description_long = response_data['description_long']
-            coordinates_lng = response_data['coordinates']['lng']
-            coordinates_lat = response_data['coordinates']['lat']
+            short_description = response_data['description_short']
+            detailed_description = response_data['description_long']
+            longitude_coord = response_data['coordinates']['lng']
+            latitude_coord = response_data['coordinates']['lat']
         except KeyError as e:
             logger.error(e)
             return
 
         place = Place.objects.get_or_create(
             title=title,
-            description_short=description_short,
-            description_long=description_long,
-            coordinates_lng=coordinates_lng,
-            coordinates_lat=coordinates_lat
+            short_description=short_description,
+            detailed_description=detailed_description,
+            longitude_coord=longitude_coord,
+            latitude_coord=latitude_coord
         )
 
-        if place[1]:
-            logger.info('{} is created'.format(place[0].title))
+        print(place)
 
-        for image_link in imgs:
-            s = SaveImagePlace()
-            s.save(image_link)
-
-            new_image_place = ImagesPlace.objects.create(
-                place=place[0],
-                image=f"places/{image_link.split('/')[-1]}"
-            )
-            new_image_place.save()
+        # if place[1]:
+        #     logger.info('{} is created'.format(place[0].title))
+        #
+        # for image_link in imgs:
+        #     s = SaveImagePlace()
+        #     s.save(image_link)
+        #
+        #     new_image_place = PlacesImages.objects.create(
+        #         place=place[0],
+        #         image=f"places/{image_link.split('/')[-1]}"
+        #     )
+        #     new_image_place.save()
