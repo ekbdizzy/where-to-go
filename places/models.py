@@ -1,6 +1,11 @@
+import requests
 from django.db import models
 from django.urls import reverse
+from django.core.files.base import ContentFile
 from tinymce.models import HTMLField
+import logging
+
+logger = logging.getLogger('main')
 
 
 class Place(models.Model):
@@ -36,9 +41,24 @@ class Place(models.Model):
 
 class PlacesImages(models.Model):
 
+    @staticmethod
+    def _get_image_data_from_url(url: str):
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.content
+
+    def save_image_from_url(self, url):
+        filename = url.split('/')[-1]
+        self.image.save(name=filename,
+                        content=ContentFile(self._get_image_data_from_url(url)))
+        logger.info(f'{filename} is saved.')
+
     def get_path_to_places_image(self, filename: str) -> str:
-        filename = f'{self.place.title}.{filename.split(".")[-1]}'
-        return f'places/{filename}'
+        """Function is used in image.upload_to."""
+        ext = filename.split(".")[-1]
+        title = self.place.title
+        filename = '.'.join([title, ext])
+        return f'places/{title}/{filename}'
 
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images', verbose_name='Название места')
     image = models.ImageField(upload_to=get_path_to_places_image, verbose_name='Файл с фотографией')

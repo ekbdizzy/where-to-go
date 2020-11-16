@@ -2,7 +2,6 @@ from django.core.management.base import BaseCommand
 from places.models import Place, PlacesImages
 import requests
 import logging
-from utils import SaveImagePlace
 
 logger = logging.getLogger('main')
 
@@ -46,11 +45,8 @@ class Command(BaseCommand):
             logger.info('{} is created'.format(new_place.title))
 
         for image_link in imgs:
-            s = SaveImagePlace()
-            s.save(image_link)
-
             new_image_place = PlacesImages.objects.create(
                 place=new_place,
                 image=f"places/{image_link.split('/')[-1]}"
             )
-            new_image_place.save()
+            new_image_place.save_image_from_url(image_link)
